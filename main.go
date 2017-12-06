@@ -25,18 +25,18 @@ func init() {
 	flag.IntVar(&port, "port", 8001, "服务器port")
 
 	logs.Async()
-	logs.SetLogger(logs.AdapterMultiFile, `{"filename":"log/tdida.log","separate":["critical", "error", "info"]}`)
 }
 
 func main() {
 	flag.Parse()
-	runtime.GOMAXPROCS(runtime.NumCPU())
+	runtime.GOMAXPROCS(workerNum)
 
 	address := fmt.Sprintf("%s:%d", host, port)
 	logs.Info("%s 服务器初始化中... 核数:%d 调试模式:%t", address, workerNum, mode)
 
 	if !mode {
 		gin.SetMode(gin.ReleaseMode)
+		logs.SetLogger(logs.AdapterMultiFile, `{"filename":"log/tdida.log","separate":["critical", "error", "info"]}`)
 	}
 
 	router := gin.Default()
