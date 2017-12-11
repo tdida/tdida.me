@@ -7,6 +7,7 @@ import (
 
 	"github.com/astaxie/beego/logs"
 	"github.com/gin-gonic/gin"
+	"tdida.me/apis"
 	"tdida.me/config"
 	"tdida.me/model"
 )
@@ -35,6 +36,13 @@ func main() {
 	logs.Info("%s 服务器初始化中... 核数:%d 调试模式:%t", address, runtime.NumCPU(), mode)
 
 	router := gin.Default()
+
+	v1 := router.Group("/v1")
+
+	{
+		v1.GET("/", apis.Index)
+	}
+
 	logs.Info("server成功启动")
 	router.Run(address)
 }
