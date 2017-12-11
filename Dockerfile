@@ -2,12 +2,11 @@
 FROM golang:1.9
 
 # 安装beego程序包和bee工具。beego程序包将在应用程序内部使用，bee工具将用于在开发过程中实时重载代码。
-RUN go get github.com/golang/dep/cmd/dep
-
-RUN dep ensure
+RUN go get -u github.com/astaxie/beego
+RUN go get -u github.com/beego/bee
 
 # 通过开发计算机上容器的8080端口暴露该应用程序。最后一行，
 EXPOSE 8080
 
 # 使用bee命令开始对我们的应用程序进行实时重载。
-CMD ["go", "run", 'main.go']
+CMD ["bee", "run"]
