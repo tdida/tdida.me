@@ -37,6 +37,8 @@ func main() {
 
 	router := gin.Default()
 
+	router.GET("/", apis.Index)
+
 	v1 := router.Group("/v1")
 
 	{
