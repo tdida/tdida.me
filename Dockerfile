@@ -1,5 +1,6 @@
 FROM golang:latest
 
+RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai  /etc/localtime
 RUN mkdir -p /go/src/tdida.me
 WORKDIR /go/src/tdida.me
 COPY . /go/src/tdida.me
